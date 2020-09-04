@@ -16,6 +16,7 @@ config = {
     'robots': [{
         'name': '机器人1',
         'key': 'any_str',
+        'push_title': '',
         'access_token': '',
         'access_secret': ''
         }... 如果有多个机器人，继续配置即可]

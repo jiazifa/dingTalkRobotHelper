@@ -2,7 +2,7 @@ import sys
 from flask import Flask, render_template, request
 from collections import namedtuple
 
-Robot = namedtuple('Robot', ['name', 'key', 'access_token', 'access_secret'])
+Robot = namedtuple('Robot', ['name', 'key', 'push_title', 'access_token', 'access_secret'])
 
 def parse_params(request):
     """  从一个Request实例中解析params参数
@@ -25,7 +25,7 @@ def parse_params(request):
     return d
 
 def find_robot_by_key(robots, key):
-    rs = list([Robot(r['name'], r['key'], r['access_token'], r['access_secret']) for r in robots])
+    rs = list([Robot(r['name'], r['key'], r['push_title'], r['access_token'], r['access_secret']) for r in robots])
     result = list(filter(lambda r: r.key == key, rs))
     return result[-1]
 
@@ -38,6 +38,7 @@ config = {
     'robots': [{
         'name': '',
         'key': '',
+        'push_title': '',
         'access_token': '',
         'access_secret': '',
     }]
@@ -67,7 +68,7 @@ def execute():
 
         new_webhook = 'https://oapi.dingtalk.com/robot/send?access_token=' + robot.access_token
         xiaoding = DingtalkChatbot(new_webhook, secret=robot.access_secret, pc_slide=True, fail_notice=False)
-        xiaoding.send_markdown('Title', text=content, is_at_all=atAll)
+        xiaoding.send_markdown(title=robot.push_title, text=content, is_at_all=atAll)
         return {'status': 'ok', 'msg': '发送成功'}
     except ImportError:
         return {'status': 'error', 'msg': '请引入 dingtalkchatbot 模块'}
