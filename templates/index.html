@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{config.name}}</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/bulma.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+  <script src="{{url_for('static', filename='js/index.js')}}"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{{url_for('index')}}">
+          <span width="112" height="28"> <strong>{{config.name}}</strong> </span>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Hi</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1 class="subtitle">1.选择机器人</h1>
+      <div class="select">
+        <select id="robot_value">
+          {% for robot in config.robots %}
+          <option value="{{robot.key}}">{{robot.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 2rem;">
+      <h1 class="subtitle">2.输入内容</h1>
+      <textarea id="content-textArea" class="textarea" placeholder="请输入内容，支持markdown语法" rows="5"></textarea>
+    </div>
+
+    <div class="container level-right" style="margin-right: 2rem; margin-top: 2rem;">
+      <label class="checkbox">
+        <input id="at_all" type="checkbox">
+        @所有人
+      </label>
+    </div>
+
+    <div class="control level-right" style="margin-right: 2rem; margin-top: 2rem;">
+      <button class="button is-primary" onclick="submitAction()">发送</button>
+    </div>
+
+    <div class="section"></div>
+    <div class="section"></div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>{{ config.name }}</strong> by Tree</a>
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+
+</html>
