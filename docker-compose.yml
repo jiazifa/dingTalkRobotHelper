@@ -1,0 +1,8 @@
+version: '3'
+
+services: 
+    ding-helper:
+        build: .
+        ports:
+            - "9000:5000" # 绑定容器的5000端口到主机的9000端口
+        command: './start_server.sh'
