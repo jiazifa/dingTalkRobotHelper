@@ -1,4 +1,4 @@
-FROM python:3.7.0
+FROM python:3.8.3
 
 ARG pypi_host=pypi.douban.com
 ARG pypi_mirror=http://pypi.douban.com/simple
@@ -21,17 +21,13 @@ RUN pip install --no-cache-dir -r requirements.txt --trusted-host ${pypi_host}
 
 COPY app.py app.py
 
-COPY app.py app.py
-
 COPY templates templates
 
 COPY static static
 
-COPY locale_setting.py locale_setting.py
+COPY local_setting.py local_setting.py
 
 COPY start_server.sh start_server.sh
-
-COPY runner.py runner.py
 
 RUN chmod a+x start_server.sh
 

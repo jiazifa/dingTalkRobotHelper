@@ -6,8 +6,9 @@
 - python 3
 
 - docker【可选】
-  
-# local_setting.py
+
+
+# 配置 local_setting.py
 
 ```
 config = {
@@ -23,6 +24,11 @@ config = {
 
 - 启动命令
 
-`pip install -r requirement.txt`
+`pip install -r requirements.txt`
 
 `python app.py`
+
+
+- docker 启动
+
+`docker-compose up` 访问 http://0.0.0.0:9000 即可
