@@ -10,7 +10,7 @@ function submitAction() {
     
     var atAllCheckbox = document.getElementById('at_all');
     var isAtAll = atAllCheckbox.checked;
-    
+
     if (content === undefined || content.length === 0) {
         alert('请输入内容');
         return;
@@ -30,7 +30,25 @@ function submitAction() {
                 alert(response.msg);
                 return;
             } 
-            alert(response.msg);
+            textArea.value = '';
+            notification(true, response.msg);
         }
     };
 };
+
+function notification(isSuccess, content) {
+    var clazz = isSuccess === true ? ' is-success' : ' is-danger'
+    var element = document.getElementById('alert-content');
+    
+    var elementClazz = element.getAttribute('class');
+    elementClazz = elementClazz.replace('is-success', '');
+    elementClazz = elementClazz.replace('is-danger', '');
+    elementClazz = elementClazz.concat(clazz);
+    element.setAttribute('class', elementClazz);
+    element.innerText = content;
+    console.log(element);
+    element.style.display = 'block';
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 2000);
+}
